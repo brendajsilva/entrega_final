@@ -4,10 +4,10 @@
   --primary: #3616f0;
   --primary-light: #068822;
   --secondary: #3f37c9;
-  --success: #4cc9f0;
-  --danger: #f72585;
+  --success: #be3c09;
+  --danger: #6a0474;
   --warning: #f8961e;
-  --dark: #212529;
+  --dark: #116eca;
   --light: #f8f9fa;
   --gray: #6c757d;
   --border-radius: 12px;
@@ -130,7 +130,7 @@ button, .btn, input[type="submit"] {
 button:hover, .btn:hover, input[type="submit"]:hover {
   background: linear-gradient(90deg, var(--primary-light), var(--primary));
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+  box-shadow: 0 5px 15px rgba(1, 172, 106, 0.3);
 }
 
 .btn-secondary {
