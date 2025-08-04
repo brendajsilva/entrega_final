@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Sistema de Compras</title>
-  <!-- Fonte Inter e CSS global -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <!-- Chart.js para gráficos -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="js/main.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -21,38 +20,33 @@
       </nav>
     </header>
     <main>
-      <!-- Dashboard inicial -->
       <section id="secDashboard">
         <div class="card">
           <h2>Bem-vindo ao Sistema de Compras</h2>
           <p>Gerencie usuários, produtos, compras, visualize relatórios e gráficos de forma moderna e intuitiva.</p>
         </div>
       </section>
-      <!-- Usuários -->
       <section id="secUsuarios" style="display:none;">
         <div class="card">
           <h2>Usuários</h2>
-          <div id="usuarioFormContainer"><!-- Formulário de usuário via JS --></div>
-          <div id="usuarioListContainer"><!-- Lista de usuários via JS --></div>
+          <div id="usuarioFormContainer"></div>
+          <div id="usuarioListContainer"></div>
         </div>
       </section>
-      <!-- Produtos -->
       <section id="secProdutos" style="display:none;">
         <div class="card">
           <h2>Produtos</h2>
-          <div id="produtoFormContainer"><!-- Formulário de produto via JS --></div>
-          <div id="produtoListContainer"><!-- Lista de produtos via JS --></div>
+          <div id="produtoFormContainer"></div>
+          <div id="produtoListContainer"></div>
         </div>
       </section>
-      <!-- Compras -->
       <section id="secCompras" style="display:none;">
         <div class="card">
           <h2>Compras</h2>
-          <div id="compraFormContainer"><!-- Formulário de compra via JS --></div>
-          <div id="compraListContainer"><!-- Lista de compras via JS --></div>
+          <div id="compraFormContainer"></div>
+          <div id="compraListContainer"></div>
         </div>
       </section>
-      <!-- Relatórios -->
       <section id="secRelatorios" style="display:none;">
         <div class="card">
           <h2>Relatórios Gerenciais</h2>
@@ -63,10 +57,9 @@
             <button data-rel="estoqueCritico">Estoque Crítico</button>
             <button data-rel="consolidado">Consolidado</button>
           </div>
-          <div id="relatorioContainer"><!-- Tabela do relatório selecionado via JS --></div>
+          <div id="relatorioContainer"></div>
         </div>
       </section>
-      <!-- Gráficos -->
       <section id="secGraficos" style="display:none;">
         <div class="card">
           <h2>Gráficos</h2>
@@ -86,10 +79,8 @@
           </div>
         </div>
       </section>
-      <div class="feedback" id="feedback"><!-- Mensagens de feedback do sistema --></div>
+      <div class="feedback" id="feedback"></div>
     </main>
   </div>
-  <!-- Script principal SPA -->
-  <script type="module" src="js/main.js"></script>
 </body>
 </html>
