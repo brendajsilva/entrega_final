@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Apagar Usuário</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarUsuario.html">Cadastrar Usuário</a>
+      <a href="listarUsuario.html">Listar Usuários</a>
+      <a href="atualizarUsuario.html">Atualizar Usuário</a>
+      <a href="apagarUsuario.html">Apagar Usuário</a>
+      <a href="consultarUsuario.html">Consultar Usuário</a>
+    </nav>
+  </header>
+  <h2>Apagar Usuário</h2>
+  <div style="margin-bottom: 16px;">
+    <label>ID do Usuário: <input type="number" id="buscarIdUsuario" min="1" style="width: 80px;"></label>
+    <button type="button" id="btnBuscarUsuario">Buscar</button>
+  </div>
+  <div id="dadosUsuario"></div>
+  <div id="mensagem"></div>
+  <button type="button" id="btnApagarUsuario" style="display:none; background:#c00; color:#fff;">Apagar Usuário</button>
+  <script src="apagarUsuario.js"></script>
+</body>
+</html> 

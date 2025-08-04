@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Consultar Usuário por ID</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarUsuario.html">Cadastrar Usuário</a>
+      <a href="listarUsuario.html">Listar Usuários</a>
+      <a href="atualizarUsuario.html">Atualizar Usuário</a>
+      <a href="apagarUsuario.html">Apagar Usuário</a>
+      <a href="consultarUsuario.html">Consultar Usuário</a>
+    </nav>
+  </header>
+    <h2>Consultar Usuário por ID</h2>
+    <form id="formConsultarUsuario">
+      <label>ID do Usuário:
+        <input type="number" name="id" id="usuarioId" required placeholder="Digite o ID do usuário">
+      </label>
+      <button type="submit" class="btn btn-success">Consultar</button>
+    </form>
+    <div id="resultado"></div>
+  </div>
+  <script src="consultarUsuario.js"></script>
+</body>
+</html> 

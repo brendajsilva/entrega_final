@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Atualizar Compra</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarCompra.html">Cadastrar Compras</a>
+      <a href="listarCompra.html">Listar Compras</a>
+      <a href="atualizarCompra.html">Atualizar Compras</a>
+      <a href="apagarCompra.html">Apagar Compras</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Atualizar Compra</h2>
+    <form id="formAtualizarCompra">
+      <input type="hidden" name="id" id="compraId">
+      <label>ID Usuário: <input type="number" name="idUsuario" id="idUsuario" required></label>
+      <label>ID Produto: <input type="number" name="idProduto" id="idProduto" required></label>
+      <label>Quantidade: <input type="number" name="quantidade" id="quantidade" required></label>
+      <label>Data da Compra: <input type="date" name="dataCompra" id="dataCompra" required></label>
+      <label>Preço Unitário: <input type="number" step="0.01" name="precoUnitario" id="precoUnitario" required></label>
+      <label>Desconto Aplicado (%): <input type="number" step="0.01" name="descontoAplicado" id="descontoAplicado" required></label>
+      <label>Preço Final: <input type="number" step="0.01" name="precoFinal" id="precoFinal" required></label>
+      <label>Forma de Pagamento: <input type="text" name="formaPagamento" id="formaPagamento" required></label>
+      <label>Status: <input type="text" name="status" id="status" required></label>
+      <button type="submit">Atualizar</button>
+    </form>
+    <div id="mensagem"></div>
+  </div>
+  <script src="atualizarCompra.js"></script>
+</body>
+</html> 

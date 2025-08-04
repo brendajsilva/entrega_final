@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Consultar Compra por ID</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarCompra.html">Cadastrar Compras</a>
+      <a href="listarCompra.html">Listar Compras</a>
+      <a href="atualizarCompra.html">Atualizar Compras</a>
+      <a href="apagarCompra.html">Apagar Compras</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Consultar Compra por ID</h2>
+    <form id="formConsultarCompra">
+      <label>ID da Compra:
+        <input type="number" name="id" id="compraId" required placeholder="Digite o ID da compra">
+      </label>
+      <button type="submit" class="btn btn-success">Consultar</button>
+    </form>
+    <div id="resultado"></div>
+  </div>
+  <script src="consultarCompra.js"></script>
+</body>
+</html> 

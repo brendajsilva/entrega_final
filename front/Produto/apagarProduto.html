@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Apagar Produto</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarProduto.html">Cadastrar Produto</a>
+      <a href="listarProduto.html">Listar Produtos</a>
+      <a href="atualizarProduto.html">Atualizar Produto</a>
+      <a href="apagarProduto.html">Apagar Produto</a>
+      <a href="consultarProduto.html">Consultar Produto</a>
+    </nav>
+  </header>
+  <h2>Apagar Produto</h2>
+  <div style="margin-bottom: 16px;">
+    <label>ID do Produto: <input type="number" id="buscarIdProduto" min="1" style="width: 80px;"></label>
+    <button type="button" id="btnBuscarProduto">Buscar</button>
+  </div>
+  <div id="dadosProduto"></div>
+  <div id="mensagem"></div>
+  <button type="button" id="btnApagarProduto" style="display:none; background:#c00; color:#fff;">Apagar Produto</button>
+  <script src="apagarProduto.js"></script>
+</body>
+</html> 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Compra</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarCompra.html">Cadastrar Compras</a>
+      <a href="listarCompra.html">Listar Compras</a>
+      <a href="atualizarCompra.html">Atualizar Compras</a>
+      <a href="apagarCompra.html">Apagar Compras</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Cadastrar Nova Compra</h2>
+    <form id="formCadastroCompra">
+      <label>ID Usuário: <input type="number" name="idUsuario" required></label>
+      <label>ID Produto: <input type="number" name="idProduto" required></label>
+      <label>Quantidade: <input type="number" name="quantidade" id="quantidade" required></label>
+      <label>Data da Compra: <input type="date" name="dataCompra" required></label>
+      <label>Preço Unitário: <input type="number" step="0.01" name="precoUnitario" id="precoUnitario" required></label>
+      <label>Desconto Aplicado (%): <input type="number" step="0.01" name="descontoAplicado" id="descontoAplicado" required></label>
+      <label>Preço Final: <input type="number" step="0.01" name="precoFinal" id="precoFinal" readonly required></label>
+      <label>Forma de Pagamento:
+        <select name="formaPagamento" id="formaPagamento" required>
+          <option value="">Selecione</option>
+          <option value="Crédito">Crédito</option>
+          <option value="PayPal">PayPal</option>
+          <option value="Pix">Pix</option>
+        </select>
+      </label>
+      <label>Status:
+        <select name="status" required>
+          <option value="">Selecione</option>
+          <option value="Pendente">Pendente</option>
+          <option value="Pago">Pago</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+      </label>
+      <button type="submit">Cadastrar</button>
+    </form>
+    <div id="mensagem"></div>
+  </div>
+  <script src="cadastrarCompra.js"></script>
+</body>
+</html> 

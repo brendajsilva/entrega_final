@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Atualizar Usuário</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarUsuario.html">Cadastrar Usuário</a>
+      <a href="listarUsuario.html">Listar Usuários</a>
+      <a href="atualizarUsuario.html">Atualizar Usuário</a>
+      <a href="apagarUsuario.html">Apagar Usuário</a>
+      <a href="consultarUsuario.html">Consultar Usuário</a>
+    </nav>
+  </header>
+    <h2>Atualizar Usuário</h2>
+    <div style="margin-bottom: 16px;">
+      <label>ID do Usuário: <input type="number" id="buscarIdUsuario" min="1" style="width: 80px;"></label>
+      <button type="button" id="btnBuscarUsuario">Buscar</button>
+    </div>
+    <form id="formAtualizarUsuario">
+      <input type="hidden" name="id" id="usuarioId">
+      <label>Primeiro Nome: <input type="text" name="firstName" id="firstName" required></label>
+      <label>Sobrenome: <input type="text" name="lastName" id="lastName" required></label>
+      <label>Idade: <input type="number" name="age" id="age" required></label>
+      <label>Email: <input type="email" name="email" id="email" required></label>
+      <label>Telefone: <input type="text" name="phone" id="phone" required></label>
+      <label>Endereço: <input type="text" name="address" id="address" required></label>
+      <label>Cidade: <input type="text" name="city" id="city" required></label>
+      <label>Estado: <input type="text" name="state" id="state" required></label>
+      <label>Data de Nascimento: <input type="date" name="birthDate" id="birthDate" required></label>
+      <button type="submit">Atualizar</button>
+    </form>
+    <div id="mensagem"></div>
+  </div>
+  <script src="atualizarUsuario.js"></script>
+</body>
+</html> 

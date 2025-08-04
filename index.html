@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Compras</title>
+  <!-- Fonte Inter e CSS global -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js para gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Sistema de Compras</h1>
+      <nav>
+        <a href="index.html" id="navDashboard" class="active">Home</a>
+        <a href="./Usuario/usuario.html" id="navUsuarios">Usuários</a>
+        <a href="./Produto/produto.html" id="navProdutos">Produtos</a>
+        <a href="./Compra/compra.html" id="navCompras">Compras</a>
+      </nav>
+    </header>
+    <main>
+      <!-- Dashboard inicial -->
+      <section id="secDashboard">
+        <div class="card">
+          <h2>Bem-vindo ao Sistema de Compras</h2>
+          <p>Gerencie usuários, produtos, compras, visualize relatórios e gráficos de forma moderna e intuitiva.</p>
+        </div>
+      </section>
+      <!-- Usuários -->
+      <section id="secUsuarios" style="display:none;">
+        <div class="card">
+          <h2>Usuários</h2>
+          <div id="usuarioFormContainer"><!-- Formulário de usuário via JS --></div>
+          <div id="usuarioListContainer"><!-- Lista de usuários via JS --></div>
+        </div>
+      </section>
+      <!-- Produtos -->
+      <section id="secProdutos" style="display:none;">
+        <div class="card">
+          <h2>Produtos</h2>
+          <div id="produtoFormContainer"><!-- Formulário de produto via JS --></div>
+          <div id="produtoListContainer"><!-- Lista de produtos via JS --></div>
+        </div>
+      </section>
+      <!-- Compras -->
+      <section id="secCompras" style="display:none;">
+        <div class="card">
+          <h2>Compras</h2>
+          <div id="compraFormContainer"><!-- Formulário de compra via JS --></div>
+          <div id="compraListContainer"><!-- Lista de compras via JS --></div>
+        </div>
+      </section>
+      <!-- Relatórios -->
+      <section id="secRelatorios" style="display:none;">
+        <div class="card">
+          <h2>Relatórios Gerenciais</h2>
+          <div id="relatorioBtns">
+            <button data-rel="usuarios">Usuários</button>
+            <button data-rel="produtos">Produtos</button>
+            <button data-rel="compras">Compras</button>
+            <button data-rel="estoqueCritico">Estoque Crítico</button>
+            <button data-rel="consolidado">Consolidado</button>
+          </div>
+          <div id="relatorioContainer"><!-- Tabela do relatório selecionado via JS --></div>
+        </div>
+      </section>
+      <!-- Gráficos -->
+      <section id="secGraficos" style="display:none;">
+        <div class="card">
+          <h2>Gráficos</h2>
+          <div class="chart-container">
+            <h3>Produto x Estoque</h3>
+            <label>ID Inicial: <input type="number" id="graficoProdutoEstoqueIdIni" min="1"></label>
+            <label>ID Final: <input type="number" id="graficoProdutoEstoqueIdFim" min="1"></label>
+            <button id="btnFiltrarGraficoProdutoEstoque">Filtrar</button>
+            <canvas id="graficoProdutoEstoque" width="600" height="300"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Usuário x Idade</h3>
+            <label>ID Inicial: <input type="number" id="graficoUsuarioIdadeIdIni" min="1"></label>
+            <label>ID Final: <input type="number" id="graficoUsuarioIdadeIdFim" min="1"></label>
+            <button id="btnFiltrarGraficoUsuarioIdade">Filtrar</button>
+            <canvas id="graficoUsuarioIdade" width="600" height="300"></canvas>
+          </div>
+        </div>
+      </section>
+      <div class="feedback" id="feedback"><!-- Mensagens de feedback do sistema --></div>
+    </main>
+  </div>
+  <!-- Script principal SPA -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

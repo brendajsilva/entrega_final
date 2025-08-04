@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Produto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="cadastrarProduto.html">Cadastrar Produto</a>
+      <a href="listarProduto.html">Listar Produtos</a>
+      <a href="atualizarProduto.html">Atualizar Produto</a>
+      <a href="apagarProduto.html">Apagar Produto</a>
+      <a href="consultarProduto.html">Consultar Produto</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Cadastrar Novo Produto</h2>
+    <form id="formCadastroProduto">
+      <label>Título: <input type="text" name="title" id="title" required></label>
+      <label>Descrição: <input type="text" name="description" id="description" required></label>
+      <label>Categoria: <input type="text" name="category" id="category" required></label>
+      <label>Preço: <input type="number" step="0.01" name="price" id="price" required></label>
+      <label>Percentual de Desconto: <input type="number" step="0.01" name="discountPercentage" id="discountPercentage" required></label>
+      <label>Estoque: <input type="number" name="stock" id="stock" required></label>
+      <label>Marca: <input type="text" name="brand" id="brand" required></label>
+      <label>Imagem (URL): <input type="text" name="thumbnail" id="thumbnail" required></label>
+      <button type="submit" id="cadastroProduto">Cadastrar</button>
+    </form>
+    <div id="mensagem"></div>
+  </div>
+  <script src="cadastrarProduto.js"></script>
+</body>
+</html> 
