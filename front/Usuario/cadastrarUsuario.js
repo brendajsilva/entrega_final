@@ -68,7 +68,7 @@ function cadastrarUsuario() {
                                 </thead>
                                 <tbody id="tbodyUsuarios">
                                     <tr>
-                                        <td>${usuario.id}</td>
+                                        <td>${usuario.idUsuario}</td>
                                         <td>${usuario.firstName} ${usuario.lastName}</td>
                                         <td>${usuario.age}</td>
                                         <td>${usuario.email}</td>

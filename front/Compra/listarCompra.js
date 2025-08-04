@@ -2,7 +2,7 @@ async function carregarCompras() {
   const tabela = document.getElementById('tabelaCompras');
   tabela.innerHTML = '';
   try {
-    const response = await fetch('http://localhost:3000/compras');
+    const response = await fetch('http://localhost:3000/compra');
     const compras = await response.json();
     compras.forEach(compra => {
       const tr = document.createElement('tr');
