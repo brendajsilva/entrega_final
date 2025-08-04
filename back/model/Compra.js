@@ -22,34 +22,6 @@ const Compra = db.define('compra',{
             key:'idUsuario'
         }
     },
-    title:{
-        type:DataTypes.STRING(30),
-        allowNull:false
-    },
-    description:{
-        type:DataTypes.STRING(30),
-        allowNull:false
-    },
-    category:{
-        type:DataTypes.STRING(30),
-        allowNull:false
-    },
-    price:{
-        type:DataTypes.FLOAT,
-        allowNull:false
-    },
-    discountPercentage:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-    stock:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-    brand:{
-        type:DataTypes.STRING(30),
-        allowNull:false
-    },
     quantidade: {
         type: DataTypes.INTEGER,
         allowNull: false

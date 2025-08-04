@@ -35,7 +35,7 @@ const Produto = db.define('produto',{
         allowNull:false
     },
     thumbnail:{
-        type:DataTypes.STRING(60),
+        type:DataTypes.STRING(255),
         allowNull:false
     }
 },{

@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
 
-const hostname = 'localhost'
-const port = 3000
-
 require('dotenv').config()
+
+const hostname = 'localhost'
+const port = process.env.PORT
+
+
 const cors = require('cors')
 const conn = require('./db/conn.js')
 
