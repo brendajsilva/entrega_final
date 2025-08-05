@@ -16,10 +16,6 @@ async function carregarProdutos() {
         <td>${produto.stock}</td>
         <td>${produto.brand}</td>
         <td><img src="${produto.thumbnail}" width="50"></td>
-        <td>
-          <button onclick="atualizarProduto(${produto.idProduto || produto.id})">Atualizar</button>
-          <button onclick="removerProduto(${produto.idProduto || produto.id})">Remover</button>
-        </td>
       `;
       tabela.appendChild(tr);
     });

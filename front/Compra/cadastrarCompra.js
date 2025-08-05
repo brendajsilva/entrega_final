@@ -11,7 +11,6 @@ document.getElementById('precoUnitario').addEventListener('input', calcularPreco
 document.getElementById('quantidade').addEventListener('input', calcularPrecoFinal);
 document.getElementById('descontoAplicado').addEventListener('input', calcularPrecoFinal);
 
-// Cadastro
 
 document.getElementById('formCadastroCompra').addEventListener('submit', async function(event) {
   event.preventDefault();
