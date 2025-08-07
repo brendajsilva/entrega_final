@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <td>${usuario.birthDate ? usuario.birthDate.substring(0,10) : ''}</td>
       <td>
         <button class="edit-btn" onclick="window.location.href='atualizarUsuario.html?id=${usuario.idUsuario || usuario.id}'">Editar</button>
-      </td>
-    `;
+      </td>`;
     tabela.appendChild(tr);
   });
 });
