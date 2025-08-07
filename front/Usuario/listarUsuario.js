@@ -28,6 +28,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function editarUsuario(id) {
-  // Redirecionar para página de edição (implementar depois)
   alert('Função de edição em desenvolvimento.');
 } 
