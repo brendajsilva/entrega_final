@@ -212,3 +212,11 @@ tr:hover {
 .badge-success {
   background: var(--success);
 }
+
+footer{
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  color: var(--gray);
+  font-size: 0.875rem;
+}
