@@ -1,42 +1,48 @@
+let cad = document.getElementById('formCadastroCompra');
+let res = document.getElementById('mensagem');
+
+let labelPrecoFinal = document.createElement('p');
+labelPrecoFinal.style.fontWeight = "bold";
+labelPrecoFinal.style.marginTop = "8px";
+cad.descontoAplicado.parentNode.appendChild(labelPrecoFinal);
+
 function calcularPrecoFinal() {
-  const precoUnitario = parseFloat(document.getElementById('precoUnitario').value) || 0;
-  const quantidade = parseInt(document.getElementById('quantidade').value) || 0;
-  const desconto = parseFloat(document.getElementById('descontoAplicado').value) || 0;
-  let precoFinal = precoUnitario * quantidade;
-  precoFinal = precoFinal * (1 - desconto / 100);
-  document.getElementById('precoFinal').value = precoFinal.toFixed(2);
+    let preco = Number(cad.precoUnitario.value) || 0;
+    let desconto = Number(cad.descontoAplicado.value) || 0;
+    let precoFinal = preco - (preco * (desconto / 100));
+    cad.precoFinal.value = precoFinal.toFixed(2);
+    labelPrecoFinal.textContent = `Preço final com desconto: R$ ${precoFinal.toFixed(2)}`;
 }
 
-document.getElementById('precoUnitario').addEventListener('input', calcularPrecoFinal);
-document.getElementById('quantidade').addEventListener('input', calcularPrecoFinal);
-document.getElementById('descontoAplicado').addEventListener('input', calcularPrecoFinal);
+cad.precoUnitario.addEventListener('input', calcularPrecoFinal);
+cad.descontoAplicado.addEventListener('input', calcularPrecoFinal);
 
+cad.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-document.getElementById('formCadastroCompra').addEventListener('submit', async function(event) {
-  event.preventDefault();
-  const form = event.target;
-  const data = {
-    idUsuario: parseInt(form.idUsuario.value),
-    idProduto: parseInt(form.idProduto.value),
-    quantidade: parseInt(form.quantidade.value),
-    dataCompra: form.dataCompra.value,
-    precoUnitario: parseFloat(form.precoUnitario.value),
-    descontoAplicado: parseFloat(form.descontoAplicado.value),
-    precoFinal: parseFloat(form.precoFinal.value),
-    formaPagamento: form.formaPagamento.value,
-    status: form.status.value
-  };
-  try {
-    const response = await fetch('http://localhost:3000/compra', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    const result = await response.json();
-    document.getElementById('mensagem').innerText = result.message || 'Compra cadastrada com sucesso!';
-    form.reset();
     calcularPrecoFinal();
-  } catch (error) {
-    document.getElementById('mensagem').innerText = 'Erro ao cadastrar compra.';
-  }
-}); 
+
+    let valores = {
+        idUsuario: Number(cad.idUsuario.value),
+        idProduto: Number(cad.idProduto.value),
+        quantidade: Number(cad.quantidade.value),
+        dataCompra: cad.dataCompra.value,
+        precoUnitario: Number(cad.precoUnitario.value),
+        descontoAplicado: Number(cad.descontoAplicado.value),
+        precoFinal: Number(cad.precoFinal.value),
+        formaPagamento: cad.formaPagamento.value,
+        status: cad.status.value
+    };
+
+    fetch('http://localhost:3000/compra', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(valores)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        res.innerHTML = "Compra cadastrada com sucesso!";
+        console.log('funcionou', data);
+    })
+    .catch(err => console.error('Erro:', err));
+});

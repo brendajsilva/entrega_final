@@ -1,25 +1,26 @@
-const {DataTypes} = require('sequelize')
-const db = require('../db/conn')
-const Compra = db.define('compra',{
-    idCompra:{
-        type:DataTypes.INTEGER,
-        primaryKey:true,
-        autoIncrement:true
+const { DataTypes } = require('sequelize');
+const db = require('../db/conn');
+
+const Compra = db.define('compra', {
+    idCompra: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
-    idProduto:{
-        type:DataTypes.INTEGER,
-        primaryKey:true,
+    idProduto: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         references:{
-            model:'produtos',
-            key:'idProduto'
+            model: 'produto',
+            key: 'idProduto'
         }
     },
-    idUsuario:{
-        type:DataTypes.INTEGER,
-        primaryKey:true,
-        references:{
-            model:'usuarios',
-            key:'idUsuario'
+    idUsuario: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'usuario',
+            key: 'idUsuario'
         }
     },
     quantidade: {
@@ -50,12 +51,13 @@ const Compra = db.define('compra',{
         type: DataTypes.STRING(20),
         allowNull: false
     }
-},{
-    timestamps:false,
-    tableName:'compras'
-})
+}, {
+    timestamps: false,
+    tableName: 'compras'
+});
 
-module.exports = Compra
+module.exports = Compra;
+
 
 // ● ID da compra (chave primária)
 // ● ID do usuário (chave estrangeira)

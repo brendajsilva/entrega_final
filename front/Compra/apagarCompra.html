@@ -15,16 +15,18 @@
       <a href="apagarCompra.html">Apagar Compras</a>
     </nav>
   </header>
+
   <div class="container">
     <h2>Apagar Compra</h2>
-    <form id="formApagarCompra">
-      <label>ID da Compra a apagar:
-        <input type="number" name="id" id="compraId" required placeholder="Digite o ID da compra">
-      </label>
-      <button type="submit" class="btn btn-danger">Apagar Compra</button>
-    </form>
+    <label>ID da Compra:
+      <input type="number" id="buscarIdCompra" placeholder="Digite o ID da compra">
+      <button type="button" id="btnBuscarCompra">Buscar Compra</button>
+    </label>
+    <div id="dadosCompra"></div>
+    <button type="button" id="btnApagarCompra" style="display:none;">Apagar Compra</button>
     <div id="mensagem"></div>
   </div>
+
   <script src="apagarCompra.js"></script>
 </body>
-</html> 
+</html>

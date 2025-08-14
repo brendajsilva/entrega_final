@@ -1,89 +1,46 @@
-document.getElementById('formCadastroProduto').addEventListener('submit', async function(event) {
-    event.preventDefault();
-    const cadastroProduto = document.getElementById('cadastroProduto');
-    const mensagem = document.getElementById('mensagem');
-    
-    // Coleta os valores dos campos
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const category = document.getElementById('category').value;
-    const price = parseFloat(document.getElementById('price').value);
-    const discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
-    const stock = parseInt(document.getElementById('stock').value);
-    const brand = document.getElementById('brand').value;
-    const thumbnail = document.getElementById('thumbnail').value;
+let formCadastro = document.getElementById('formCadastroProduto');
+let res = document.getElementById('mensagem');
 
-    // Validação simples
-    if (!title || !description || !category || isNaN(price) || isNaN(discountPercentage) || isNaN(stock) || !brand || !thumbnail) {
-        alert('Por favor, preencha todos os campos corretamente.');
-        return;
-    }
+let labelPrecoFinal = document.createElement('p');
+labelPrecoFinal.style.fontWeight = "bold";
+labelPrecoFinal.style.marginTop = "8px";
+formCadastro.discountPercentage.parentNode.appendChild(labelPrecoFinal);
 
-    const valores = {
-        title,
-        description,
-        category,
-        price,
-        discountPercentage,
-        stock,
-        brand,
-        thumbnail
+function calcularPrecoComDesconto() {
+    let preco = Number(formCadastro.price.value) || 0;
+    let desconto = Number(formCadastro.discountPercentage.value) || 0;
+    let precoFinal = preco - (preco * (desconto / 100));
+    labelPrecoFinal.textContent = `Preço final com desconto: R$ ${precoFinal.toFixed(2)}`;
+    return precoFinal.toFixed(2);
+}
+
+formCadastro.price.addEventListener('input', calcularPrecoComDesconto);
+formCadastro.discountPercentage.addEventListener('input', calcularPrecoComDesconto);
+
+formCadastro.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let valores = {
+        title: formCadastro.title.value,
+        description: formCadastro.description.value,
+        category: formCadastro.category.value,
+        price: Number(formCadastro.price.value),
+        discountPercentage: Number(formCadastro.discountPercentage.value),
+        stock: Number(formCadastro.stock.value),
+        brand: formCadastro.brand.value,
+        thumbnail: formCadastro.thumbnail.value,
+        precoFinal: Number(calcularPrecoComDesconto())
     };
 
-    cadastroProduto.textContent = 'Cadastrando...';
-    cadastroProduto.disabled = true;
-    mensagem.innerHTML = '';
-
-    try {
-        const resp = await fetch('http://localhost:3000/produto', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(valores)
-        });
-        if (!resp.ok) throw new Error('Erro ao cadastrar produto');
-        const produto = await resp.json();
-        mensagem.innerHTML = `<div class='alert alert-success'>Produto cadastrado com sucesso!</div>`;
-        mensagem.innerHTML += `
-            <table border="1" style="margin-top:10px;">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Título</th>
-                        <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>Preço</th>
-                        <th>Desconto (%)</th>
-                        <th>Estoque</th>
-                        <th>Marca</th>
-                        <th>Imagem</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${produto.idProduto || produto.id}</td>
-                        <td>${produto.title}</td>
-                        <td>${produto.description}</td>
-                        <td>${produto.category}</td>
-                        <td>${produto.price}</td>
-                        <td>${produto.discountPercentage}</td>
-                        <td>${produto.stock}</td>
-                        <td>${produto.brand}</td>
-                        <td><img src="${produto.thumbnail}" width="50"></td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-        alert('Produto cadastrado com sucesso!');
-        document.getElementById('formCadastroProduto').reset();
-    } catch (err) {
-        console.error('Erro ao cadastrar produto:', err);
-        mensagem.innerHTML = `<div class='alert alert-danger'>Erro ao cadastrar produto. Verifique os dados e tente novamente.</div>`;
-    } finally {
-        cadastroProduto.textContent = 'Cadastrar';
-        cadastroProduto.disabled = false;
-    }
+    fetch('http://localhost:3000/produto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(valores)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        res.innerHTML = ` Produto cadastrado com sucesso!<br>💰 Preço final: R$ ${valores.precoFinal}`;
+        console.log(data);
+    })
+    .catch(err => res.innerHTML = " Erro ao cadastrar: " + err);
 });
-
-

@@ -1,69 +1,55 @@
-// Função para buscar usuário e exibir dados
-async function buscarUsuarioPorId(id) {
-  const resp = await fetch(`http://localhost:3000/usuario/${id}`);
-  if (!resp.ok) return null;
-  return await resp.json();
-}
-
-// Buscar e exibir usuário ao clicar em Buscar
-const btnBuscar = document.getElementById('btnBuscarUsuario');
+const btnBuscarUsu = document.getElementById('btnBuscarUsuario');
 const dadosUsuario = document.getElementById('dadosUsuario');
 const btnApagar = document.getElementById('btnApagarUsuario');
-const mensagem = document.getElementById('mensagem');
-let usuarioAtual = null;
+const res = document.getElementById('mensagem');
 
-if (btnBuscar) {
-  btnBuscar.addEventListener('click', async () => {
-    const id = document.getElementById('buscarIdUsuario').value;
-    mensagem.innerHTML = '';
-    dadosUsuario.innerHTML = '';
-    btnApagar.style.display = 'none';
-    usuarioAtual = null;
+// Busca usuário por ID
+btnBuscarUsu.addEventListener('click', () => {
+    let id = document.getElementById('buscarIdUsuario').value;
     if (!id) {
-      mensagem.innerHTML = '<span style="color:red">Digite um ID válido.</span>';
-      return;
+        dadosUsuario.innerHTML = "Informe um ID válido.";
+        btnApagar.style.display = "none";
+        return;
     }
-    const usuario = await buscarUsuarioPorId(id);
-    if (!usuario) {
-      mensagem.innerHTML = '<span style="color:red">Usuário não encontrado.</span>';
-      return;
-    }
-    usuarioAtual = usuario;
-    dadosUsuario.innerHTML = `
-      <div class="card">
-        <h3>${usuario.firstName} ${usuario.lastName}</h3>
-        <p><strong>ID:</strong> ${usuario.idUsuario || usuario.id}</p>
-        <p><strong>Idade:</strong> ${usuario.age}</p>
-        <p><strong>Email:</strong> ${usuario.email}</p>
-        <p><strong>Telefone:</strong> ${usuario.phone}</p>
-        <p><strong>Endereço:</strong> ${usuario.address}</p>
-        <p><strong>Cidade:</strong> ${usuario.city}</p>
-        <p><strong>Estado:</strong> ${usuario.state}</p>
-        <p><strong>Data de Nascimento:</strong> ${usuario.birthDate ? usuario.birthDate.substring(0,10) : ''}</p>
-      </div>
-    `;
-    btnApagar.style.display = 'inline-block';
-  });
-}
 
-// Apagar usuário ao clicar em Apagar
-if (btnApagar) {
-  btnApagar.addEventListener('click', async () => {
-    if (!usuarioAtual) return;
-    if (!confirm('Tem certeza que deseja apagar este usuário?')) return;
-    mensagem.innerHTML = '';
-    const id = usuarioAtual.idUsuario || usuarioAtual.id;
-    const resp = await fetch(`http://localhost:3000/usuario/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    });
-    if (resp.ok) {
-      mensagem.innerHTML = '<span style="color:green">Usuário apagado com sucesso!</span>';
-      dadosUsuario.innerHTML = '';
-      btnApagar.style.display = 'none';
-      usuarioAtual = null;
-    } else {
-      mensagem.innerHTML = '<span style="color:red">Erro ao apagar usuário.</span>';
-    }
-  });
-} 
+    fetch(`http://localhost:3000/usuario/${id}`)
+        .then(resp => {
+            if (!resp.ok) throw new Error('Usuário não encontrado');
+            return resp.json();
+        })
+        .then(usuario => {
+            if (usuario.idUsuario) {
+                dadosUsuario.innerHTML = `
+                    <p><strong>${usuario.firstName} ${usuario.lastName}</strong></p>
+                    <p>Email: ${usuario.email}</p>
+                `;
+                btnApagar.style.display = "inline-block";
+                btnApagar.setAttribute('data-id', usuario.idUsuario);
+            } else {
+                dadosUsuario.innerHTML = "Usuário não encontrado.";
+                btnApagar.style.display = "none";
+            }
+        })
+        .catch(err => {
+            dadosUsuario.innerHTML = "Erro: " + err;
+            btnApagar.style.display = "none";
+        });
+});
+
+// Apaga usuário
+btnApagar.addEventListener('click', () => {
+    let id = btnApagar.getAttribute('data-id');
+    if (!id) return;
+
+    fetch(`http://localhost:3000/usuario/${id}`, { method: 'DELETE' })
+        .then(resp => {
+            if (!resp.ok) throw new Error('Erro ao apagar usuário');
+            return resp.json();
+        })
+        .then(() => {
+            res.innerHTML = "Usuário apagado com sucesso!";
+            dadosUsuario.innerHTML = "";
+            btnApagar.style.display = "none";
+        })
+        .catch(err => res.innerHTML = "Erro ao apagar: " + err);
+});

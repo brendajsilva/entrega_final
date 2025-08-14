@@ -1,32 +1,35 @@
-async function listarUsuarios() {
-  const response = await fetch('http://localhost:3000/usuario');
-  return response.json();
-}
+const tabela = document.getElementById('tabelaUsuarios');
+const res = document.getElementById('mensagem');
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const tabela = document.querySelector('#tabelaUsuarios');
-  const usuarios = await listarUsuarios();
-  tabela.innerHTML = '';
-  usuarios.forEach(usuario => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${usuario.idUsuario || usuario.id}</td>
-      <td>${usuario.firstName}</td>
-      <td>${usuario.lastName}</td>
-      <td>${usuario.age}</td>
-      <td>${usuario.email}</td>
-      <td>${usuario.phone}</td>
-      <td>${usuario.address}</td>
-      <td>${usuario.city}</td>
-      <td>${usuario.state}</td>
-      <td>${usuario.birthDate ? usuario.birthDate.substring(0,10) : ''}</td>
-      <td>
-        <button class="edit-btn" onclick="window.location.href='atualizarUsuario.html?id=${usuario.idUsuario || usuario.id}'">Editar</button>
-      </td>`;
-    tabela.appendChild(tr);
-  });
-});
+fetch('http://localhost:3000/usuario')
+    .then(resp => resp.json())
+    .then(dados => {
+        tabela.innerHTML = ""; 
 
-function editarUsuario(id) {
-  alert('Função de edição em desenvolvimento.');
-} 
+        dados.forEach(usuario => {
+            const nascimento = new Date(usuario.birthDate);
+            const dia = String(nascimento.getDate()).padStart(2, '0');
+            const mes = String(nascimento.getMonth() + 1).padStart(2, '0');
+            const ano = nascimento.getFullYear();
+            const dataFormatada = `${dia}/${mes}/${ano}`;
+
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${usuario.idUsuario}</td>
+                <td>${usuario.firstName || ''}</td>
+                <td>${usuario.lastName || ''}</td>
+                <td>${usuario.age || ''}</td>
+                <td>${usuario.email || ''}</td>
+                <td>${usuario.phone || ''}</td>
+                <td>${usuario.address || ''}</td>
+                <td>${usuario.city || ''}</td>
+                <td>${usuario.state || ''}</td>
+                <td>${dataFormatada}</td>
+                <td>
+                    <button onclick="apagarUsuario(${usuario.idUsuario})">Apagar</button>
+                </td>
+            `;
+            tabela.appendChild(tr);
+        });
+    })
+    .catch(err => res.innerHTML = "Erro ao listar: " + err);

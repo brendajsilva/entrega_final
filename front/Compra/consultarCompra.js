@@ -1,27 +1,27 @@
-document.getElementById('formConsultarCompra').addEventListener('submit', async function(event) {
-  event.preventDefault();
-  const id = document.getElementById('compraId').value;
-  const resultado = document.getElementById('resultado');
-  resultado.innerHTML = '';
-  try {
-    const response = await fetch(`http://localhost:3000/compras/${id}`);
-    if (!response.ok) throw new Error('Compra não encontrada');
-    const compra = await response.json();
-    resultado.innerHTML = `
-      <div class="card">
-        <h3>Compra #${compra.idCompra || compra.id}</h3>
-        <p><strong>ID Usuário:</strong> ${compra.idUsuario}</p>
-        <p><strong>ID Produto:</strong> ${compra.idProduto}</p>
-        <p><strong>Quantidade:</strong> ${compra.quantidade}</p>
-        <p><strong>Data da Compra:</strong> ${compra.dataCompra ? new Date(compra.dataCompra).toLocaleDateString() : ''}</p>
-        <p><strong>Preço Unitário:</strong> R$ ${compra.precoUnitario}</p>
-        <p><strong>Desconto:</strong> ${compra.descontoAplicado}%</p>
-        <p><strong>Preço Final:</strong> R$ ${compra.precoFinal}</p>
-        <p><strong>Forma de Pagamento:</strong> ${compra.formaPagamento}</p>
-        <p><strong>Status:</strong> ${compra.status}</p>
-      </div>
-    `;
-  } catch (error) {
-    resultado.innerHTML = `<div class='alert alert-danger'>Compra não encontrada.</div>`;
-  }
-}); 
+let form = document.getElementById('formConsultarCompra');
+let res = document.getElementById('resultado');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let id = document.getElementById('compraId').value;
+
+    fetch(`http://localhost:3000/compra/${id}`)
+        .then(resp => resp.json())
+        .then(data => {
+            if (data.id) {
+                res.innerHTML = `
+                    <p>ID: ${data.id}</p>
+                    <p>Usuário: ${data.idUsuario}</p>
+                    <p>Produto: ${data.idProduto}</p>
+                    <p>Quantidade: ${data.quantidade}</p>
+                    <p>Data: ${data.dataCompra}</p>
+                    <p>Preço Final: ${data.precoFinal}</p>
+                    <p>Status: ${data.status}</p>
+                `;
+            } else {
+                res.innerHTML = "Compra não encontrada.";
+            }
+        })
+        .catch(err => res.innerHTML = "Erro: " + err);
+});
