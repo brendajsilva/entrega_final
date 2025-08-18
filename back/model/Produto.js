@@ -40,7 +40,7 @@ const Produto = db.define('produto',{
     }
 },{
     timestamps:false,
-    tableName:'produtos'
+    tableName:'produto'
 })
 
 module.exports = Produto

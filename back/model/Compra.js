@@ -53,7 +53,7 @@ const Compra = db.define('compra', {
     }
 }, {
     timestamps: false,
-    tableName: 'compras'
+    tableName: 'compra'
 });
 
 module.exports = Compra;

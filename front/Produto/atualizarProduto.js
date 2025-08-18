@@ -1,85 +1,85 @@
-let btnBuscar = document.getElementById('btnBuscarCompra');
-let formAtualizar = document.getElementById('formAtualizarCompra');
+let btnBuscarProduto = document.getElementById('btnBuscarProduto');
+let formAtualizarProduto = document.getElementById('formAtualizarProduto');
 let res = document.getElementById('mensagem');
 
-// Cria label do preço final
-let labelPrecoFinal = document.createElement('p');
-labelPrecoFinal.style.fontWeight = "bold";
-labelPrecoFinal.style.marginTop = "8px";
-formAtualizar.precoFinal.parentNode.appendChild(labelPrecoFinal);
-
-// Função para calcular preço final
-function calcularPrecoFinal() {
-    let preco = Number(formAtualizar.precoUnitario.value) || 0;
-    let desconto = Number(formAtualizar.descontoAplicado.value) || 0;
-    let quantidade = Number(formAtualizar.quantidade.value) || 1;
-    let precoFinal = (preco - (preco * (desconto / 100))) * quantidade;
-    labelPrecoFinal.textContent = `Preço final: R$ ${precoFinal.toFixed(2)}`;
-    formAtualizar.precoFinal.value = precoFinal.toFixed(2);
-    return precoFinal.toFixed(2);
-}
-
-// Atualiza preço final quando usuário muda preço, desconto ou quantidade
-formAtualizar.precoUnitario.addEventListener('input', calcularPrecoFinal);
-formAtualizar.descontoAplicado.addEventListener('input', calcularPrecoFinal);
-formAtualizar.quantidade.addEventListener('input', calcularPrecoFinal);
-
-// Buscar compra
-btnBuscar.addEventListener('click', () => {
-    let id = document.getElementById('compraIdBusca').value.trim();
+// Buscar produto por ID
+btnBuscarProduto.addEventListener('click', async () => {
+    let id = document.getElementById('buscarIdProduto').value.trim();
     if (!id) {
         res.innerHTML = "Informe um ID válido.";
         return;
     }
 
-    fetch(`http://localhost:3000/compra/${id}`)
-        .then(resp => {
-            if (!resp.ok) throw new Error('Compra não encontrada');
-            return resp.json();
-        })
-        .then(compra => {
-            if (compra.idCompra) {
-                document.getElementById('compraId').value = compra.idCompra;
-                formAtualizar.idUsuario.value = compra.idUsuario;
-                formAtualizar.idProduto.value = compra.idProduto;
-                formAtualizar.quantidade.value = compra.quantidade;
-                formAtualizar.dataCompra.value = compra.dataCompra.split('T')[0];
-                formAtualizar.precoUnitario.value = compra.precoUnitario;
-                formAtualizar.descontoAplicado.value = compra.descontoAplicado;
-                formAtualizar.formaPagamento.value = compra.formaPagamento;
-                formAtualizar.status.value = compra.status;
-                calcularPrecoFinal();
-                res.innerHTML = "Compra carregada para atualização!";
-            } else {
-                res.innerHTML = "Compra não encontrada.";
-            }
-        })
-        .catch(err => res.innerHTML = "Erro: " + err);
+    try {
+        const resp = await fetch(`http://localhost:3000/produto/${id}`);
+        if (!resp.ok) {
+            const errorData = await resp.json();
+            throw new Error(errorData.message || 'Produto não encontrado');
+        }
+        const produto = await resp.json();
+
+        // Preenche os campos apenas se o produto existir
+        if (produto && produto.idProduto) {
+            document.getElementById('produtoId').value = produto.idProduto;
+            document.getElementById('title').value = produto.title || '';
+            document.getElementById('description').value = produto.description || '';
+            document.getElementById('category').value = produto.category || '';
+            document.getElementById('price').value = produto.price || 0;
+            document.getElementById('discountPercentage').value = produto.discountPercentage || 0;
+            document.getElementById('stock').value = produto.stock || 0;
+            document.getElementById('brand').value = produto.brand || '';
+            document.getElementById('thumbnail').value = produto.thumbnail || '';
+
+            res.innerHTML = "Produto carregado com sucesso!";
+        } else {
+            res.innerHTML = "Produto não encontrado.";
+        }
+    } catch (err) {
+        res.innerHTML = "Erro ao buscar produto: " + err.message;
+        console.error("Erro detalhado:", err);
+    }
 });
 
-// Atualizar compra
-formAtualizar.addEventListener('submit', (e) => {
+// Atualizar produto - CORREÇÃO DA LINHA 56
+formAtualizarProduto.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    let id = document.getElementById('compraId').value;
-    let valores = {
-        idUsuario: Number(formAtualizar.idUsuario.value),
-        idProduto: Number(formAtualizar.idProduto.value),
-        quantidade: Number(formAtualizar.quantidade.value),
-        dataCompra: formAtualizar.dataCompra.value,
-        precoUnitario: Number(formAtualizar.precoUnitario.value),
-        descontoAplicado: Number(formAtualizar.descontoAplicado.value),
-        precoFinal: Number(calcularPrecoFinal()),
-        formaPagamento: formAtualizar.formaPagamento.value,
-        status: formAtualizar.status.value
-    };
+    try {
+        let id = document.getElementById('produtoId').value;
+        if (!id) {
+            throw new Error('ID do produto não encontrado');
+        }
 
-    fetch(`http://localhost:3000/compra/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(valores)
-    })
-    .then(resp => resp.json())
-    .then(() => res.innerHTML = `Compra atualizada!<br>Preço final: R$ ${valores.precoFinal}`)
-    .catch(err => res.innerHTML = "Erro ao atualizar: " + err);
+        // Validação dos campos numéricos
+        let price = parseFloat(document.getElementById('price').value) || 0;
+        let discount = parseFloat(document.getElementById('discountPercentage').value) || 0;
+        let stock = parseInt(document.getElementById('stock').value) || 0;
+
+        let dados = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('description').value,
+            category: document.getElementById('category').value,
+            price: price,
+            discountPercentage: discount,
+            stock: stock,
+            brand: document.getElementById('brand').value,
+            thumbnail: document.getElementById('thumbnail').value
+        };
+
+        const resp = await fetch(`http://localhost:3000/produto/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dados)
+        });
+
+        if (!resp.ok) {
+            const errorData = await resp.json();
+            throw new Error(errorData.message || 'Erro ao atualizar');
+        }
+
+        res.innerHTML = "Produto atualizado com sucesso!";
+    } catch (err) {
+        res.innerHTML = "Erro ao atualizar: " + err.message;
+        console.error("Erro na atualização:", err);
+    }
 });

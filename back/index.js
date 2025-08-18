@@ -19,13 +19,13 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/compra',compraController.cadastrar)
-app.get('/compra',compraController.listar)
-app.delete('/compra/:id',compraController.apagar)
+app.get('/compra', compraController.listar);
+app.delete('/compra/:id', compraController.apagar);
 app.put('/compra/:id',compraController.atualizar)
 
 app.post('/produto',produtoController.cadastrar)
 app.get('/produto',produtoController.listar)
-app.get('/produto/:id',produtoController.buscarPorId)
+app.get('/produto/:id', produtoController.buscarPorId)
 app.delete('/produto/:id',produtoController.apagar)
 app.put('/produto/:id',produtoController.atualizar)
 

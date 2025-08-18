@@ -6,7 +6,7 @@ let res = document.getElementById('mensagem');
 let labelPrecoFinal = document.createElement('p');
 labelPrecoFinal.style.fontWeight = "bold";
 labelPrecoFinal.style.marginTop = "8px";
-formAtualizar.precoFinal.parentNode.appendChild(labelPrecoFinal);
+formAtualizar.insertBefore(labelPrecoFinal, formAtualizar.querySelector('button[type="submit"]'));
 
 // Função para calcular preço final
 function calcularPrecoFinal() {
@@ -44,8 +44,11 @@ btnBuscar.addEventListener('click', () => {
                 formAtualizar.dataCompra.value = compra.dataCompra.split('T')[0];
                 formAtualizar.precoUnitario.value = compra.precoUnitario;
                 formAtualizar.descontoAplicado.value = compra.descontoAplicado;
+                
+                // Estas linhas continuam exatamente iguais, mas agora funcionam com os selects
                 formAtualizar.formaPagamento.value = compra.formaPagamento;
                 formAtualizar.status.value = compra.status;
+                
                 calcularPrecoFinal();
                 res.innerHTML = "Compra carregada para atualização!";
             } else {
@@ -68,8 +71,8 @@ formAtualizar.addEventListener('submit', (e) => {
         precoUnitario: Number(formAtualizar.precoUnitario.value),
         descontoAplicado: Number(formAtualizar.descontoAplicado.value),
         precoFinal: Number(calcularPrecoFinal()),
-        formaPagamento: formAtualizar.formaPagamento.value,
-        status: formAtualizar.status.value
+        formaPagamento: formAtualizar.formaPagamento.value, // Continua igual
+        status: formAtualizar.status.value // Continua igual
     };
 
     fetch(`http://localhost:3000/compra/${id}`, {

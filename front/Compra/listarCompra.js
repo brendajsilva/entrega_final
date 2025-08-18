@@ -12,7 +12,7 @@ fetch('http://localhost:3000/compra')
                 <td>${compra.idUsuario}</td>
                 <td>${compra.idProduto}</td>
                 <td>${compra.quantidade}</td>
-                <td>${compra.dataCompra}</td>
+                <td>${new Date(compra.dataCompra).toLocaleDateString('pt-BR')}</td>
                 <td>${compra.precoUnitario}</td>
                 <td>${compra.descontoAplicado}</td>
                 <td>${compra.precoFinal}</td>

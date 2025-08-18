@@ -34,8 +34,26 @@
       <label>Preço Unitário: <input type="number" step="0.01" name="precoUnitario" id="precoUnitario" required></label>
       <label>Desconto Aplicado (%): <input type="number" step="0.01" name="descontoAplicado" id="descontoAplicado" required></label>
       <label>Preço Final: <input type="number" step="0.01" name="precoFinal" id="precoFinal" required readonly></label>
-      <label>Forma de Pagamento: <input type="text" name="formaPagamento" id="formaPagamento" required></label>
-      <label>Status: <input type="text" name="status" id="status" required></label>
+      
+      <label>Forma de Pagamento:
+        <select name="formaPagamento" id="formaPagamento" required>
+          <option value="">Selecione</option>
+          <option value="Pix">Pix</option>
+          <option value="Cartão">Cartão</option>
+          <option value="Boleto">Boleto</option>
+          <option value="Dinheiro">Dinheiro</option>
+        </select>
+      </label>
+      
+      <label>Status:
+        <select name="status" id="status" required>
+          <option value="">Selecione</option>
+          <option value="Pago">Pago</option>
+          <option value="Pendente">Pendente</option>
+          <option value="Cancelado">Cancelado</option>
+          <option value="Processando">Processando</option>
+        </select>
+      </label>
 
       <button type="submit">Atualizar Compra</button>
     </form>

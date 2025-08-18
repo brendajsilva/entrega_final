@@ -45,7 +45,7 @@
 
     },{
         timestamps:false,
-        tableName:'usuarios'
+        tableName:'usuario'
     })
 
     module.exports = Usuario

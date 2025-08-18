@@ -1,3 +1,4 @@
+// Seleciona o formulário e a div de resultado
 let formConsultar = document.getElementById('formConsultarUsuario');
 let res = document.getElementById('resultado');
 
@@ -17,7 +18,8 @@ formConsultar.addEventListener('submit', (e) => {
         })
         .then(usuario => {
             if (usuario.idUsuario) {
-                const nascimento = new Date(usuario.birthDate);
+                // Formata a data de nascimento
+                const nascimento = new Date(usuario.birthDate || usuario.dataNascimento || Date.now());
                 const dia = String(nascimento.getDate()).padStart(2, '0');
                 const mes = String(nascimento.getMonth() + 1).padStart(2, '0');
                 const ano = nascimento.getFullYear();
@@ -25,11 +27,11 @@ formConsultar.addEventListener('submit', (e) => {
 
                 res.innerHTML = `
                     <p><strong>ID:</strong> ${usuario.idUsuario}</p>
-                    <p><strong>Nome:</strong> ${usuario.firstName} ${usuario.lastName}</p>
-                    <p><strong>Idade:</strong> ${usuario.age}</p>
-                    <p><strong>Email:</strong> ${usuario.email}</p>
-                    <p><strong>Telefone:</strong> ${usuario.phone}</p>
-                    <p><strong>Endereço:</strong> ${usuario.address}, ${usuario.city} - ${usuario.state}</p>
+                    <p><strong>Nome:</strong> ${usuario.firstName || usuario.nome} ${usuario.lastName || ''}</p>
+                    <p><strong>Idade:</strong> ${usuario.age || '-'}</p>
+                    <p><strong>Email:</strong> ${usuario.email || '-'}</p>
+                    <p><strong>Telefone:</strong> ${usuario.phone || '-'}</p>
+                    <p><strong>Endereço:</strong> ${usuario.address || '-'}, ${usuario.city || '-'} - ${usuario.state || '-'}</p>
                     <p><strong>Data de Nascimento:</strong> ${dataFormatada}</p>
                 `;
             } else {

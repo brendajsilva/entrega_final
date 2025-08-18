@@ -16,14 +16,18 @@
       <a href="consultarProduto.html">Consultar Produto</a>
     </nav>
   </header>
+
+  <main class="container">
     <h2>Consultar Produto por ID</h2>
     <form id="formConsultarProduto">
-      <label>ID do Produto:
-        <input type="number" name="id" id="produtoId" required placeholder="Digite o ID do produto">
-      </label>
+      <label for="produtoId">ID do Produto:</label>
+      <input type="number" id="produtoId" name="id" placeholder="Digite o ID do produto" required>
       <button type="submit" class="btn btn-success">Consultar</button>
     </form>
-    <div id="resultado"></div>
+
+    <div id="resultado" style="margin-top: 20px;"></div>
+  </main>
+
   <script src="consultarProduto.js"></script>
 </body>
-</html> 
+</html>
