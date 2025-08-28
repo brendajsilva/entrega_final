@@ -8,7 +8,7 @@ const port = process.env.PORT
 
 
 const cors = require('cors')
-const conn = require('./db/conn.js')
+const conn = require('./db/conn')
 
 const produtoController = require('./controller/produto.controller.js')
 const compraController = require('./controller/compra.controller.js')
