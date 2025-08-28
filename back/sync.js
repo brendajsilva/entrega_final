@@ -1,6 +1,6 @@
 require('dotenv').config()
 const conn = require('./db/conn')
-const {Usuario, Compra, Produto} = require('./model/rel')
+const {Usuario, Compra, Produto} = require('./model/rel') // Puxa os relacionamentos da pasta rel.js para a sincronização com o Banco
 
 async function syncDataBase(){
     try{
@@ -13,3 +13,5 @@ async function syncDataBase(){
     }
 }
 syncDataBase()
+
+//Aqui acontece a sincronização com o Banco de Dados
