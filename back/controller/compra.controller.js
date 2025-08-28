@@ -44,7 +44,7 @@ const apagar = async (req, res) => {
   const id = req.params.id;
   try {
     const dados = await Compra.findByPk(id, {
-    });
+    })
     if (dados) {
       await Compra.destroy({ where: {idCompra:id } });
       res.status(201).json({ message: 'Dados excluídos com sucesso!' });
